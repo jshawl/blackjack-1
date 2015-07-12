@@ -1,0 +1,28 @@
+*{
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  background: #fffff0;
+
+}
+
+.title{
+  text-align: center;
+  font-size: 3em;
+  font-style: italic;
+  background-color:
+}
+
+.dealerArea, .playerArea {
+    box-sizing: border-box;
+    position: relative;
+    height: 200px;
+    margin-bottom: 5px;
+    background-color: #16BC16;
+}
+
+
+.dealerTotal, .playerTotal {
+
+}
