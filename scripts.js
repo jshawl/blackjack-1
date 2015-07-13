@@ -11,7 +11,7 @@ for (var i = 0; i< 52; i++){
 var cardValue = function (card) {
   var index = Math.floor((card/4) + 1);
   if (index === 1){index = 11;}
-  if (index > 10){index = 10;}
+  else if (index > 10){index = 10;}
   return index;
 }
 
@@ -36,6 +36,8 @@ var cardString = function(card){
 
 var toHand = function(card) {
   var playerCard = deck.pop();
+  playerHand.push(playerCard);
+
   return playerCard;
 }
 $(document).ready (function (){
@@ -45,11 +47,19 @@ $(document).ready (function (){
       var string = cardString(toHand());
       $('<div><div>').addClass('card').appendTo('.playerArea');
         div ++
-
         $('.card').eq(div).html(string);
+        playerTotal();
   })
 })
 
 var playerTotal = function (card) {
+    var player = 0;
+    for( var i = 0; i < playerHand.length; i++){
 
+      player += cardValue(playerHand[i]);
+
+      console.log(player);
+    }
+
+    $('.playerTotal').html('Player Hand: ' + player)
 }
