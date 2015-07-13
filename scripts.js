@@ -1,6 +1,12 @@
-
+var currentBet = 25;
+var playerDiv = -1;
+var dealerDiv = -1;
 var deck = [];
 var playerHand = [];
+var dealerHand = [];
+var money = 500;
+var dealerTotal = 0;
+var playerTotal = 0;
 
 for (var i = 0; i< 52; i++){
   var j = (Math.floor(Math.random() * i));
@@ -40,26 +46,67 @@ var toHand = function(card) {
 
   return playerCard;
 }
-$(document).ready (function (){
-    var div = -1;
 
-    $('#hit').on('click', function (){
-      var string = cardString(toHand());
-      $('<div><div>').addClass('card').appendTo('.playerArea');
-        div ++
-        $('.card').eq(div).html(string);
-        playerTotal();
-  })
-})
-
-var playerTotal = function (card) {
+var toDealerHand = function(card) {
+  var dealerCard = deck.pop();
+  dealerHand.push(dealerCard);
+  return dealerCard;
+}
+var playerTotal = function (array) {
     var player = 0;
-    for( var i = 0; i < playerHand.length; i++){
+    for( var i = 0; i < array.length; i++){
 
-      player += cardValue(playerHand[i]);
+      player += cardValue(array[i]);
 
-      console.log(player);
     }
 
     $('.playerTotal').html('Player Hand: ' + player)
+    return player
 }
+
+var dealer = function(){
+
+  var string = cardString(toDealerHand());
+  $('<div><div>').addClass('dealerCard').appendTo('.dealerArea')
+  $('<div><div>').addClass('hiddenCard').appendTo('.dealerArea')
+    dealerDiv +=1;
+  $('.dealerCard').eq(dealerDiv).html(string);
+}
+
+}
+
+var hit = function() {
+  var string = cardString(toHand());
+    $('<div><div>').addClass('playerCard').appendTo('.playerArea');
+        playerDiv +=1;
+      $('.playerCard').eq(playerDiv).html(string);
+      playerTotal(playerHand);
+      if(playerTotal(playerHand) > 21) {alert('You busted!')}
+
+}
+$(document).ready (function (){
+
+//Hit Button Click Event
+  $('#hit').on('click', function (){
+        hit();
+
+      })
+
+  $('#stand').on('click', function(){
+
+    alert ('You chose to stand on ' + playerTotal(playerHand));
+
+  })
+
+  $('#deal').on('click', function(){
+
+    dealer();
+
+  })
+
+  $('#increaseBet').on('click', function(){
+    currentBet += 25;
+    if (currentBet <= money){$('.bet').html('Current Bet: $' + currentBet)}
+    else {alert('Not Enough Money!')}
+  })
+})

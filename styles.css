@@ -8,6 +8,10 @@ body {
 
 }
 
+nav {
+  margin-top: 5px;
+}
+
 .title{
   text-align: center;
   font-size: 3em;
@@ -16,15 +20,16 @@ body {
 }
 
 .playerArea, .dealerArea {
-    box-sizing: border-box;
     height: 200px;
     position: relative;
-    margin-bottom: 5px;
+    width: 90%;
     background-color: #16BC16;
     border: 3px black solid;
+    margin: 0 auto;
+    margin-bottom: 5px;
 }
 
-.card {
+.playerCard, .dealerCard, .hiddenCard {
   background-color: white;
   border-color: #808080 #000000 #000000 #808080;
   border-width: 1px;
@@ -38,6 +43,7 @@ body {
   line-height: 5;
   display: inline-block;
   margin-left: 5px;
+  margin-top: 30px;
 }
 
 }
@@ -45,9 +51,12 @@ body {
   font-size: 1.2em;
 }
 
-.playerTotal {
+.playerTotal, .money, .bet{
   color: white;
   position: relative;
-  bottom: -165px;
-  left: 10px;
+  margin-left: 10px
+}
+
+.hiddenCard {
+  background: red;
 }
