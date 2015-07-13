@@ -1,9 +1,10 @@
 *{
   font-family: 'Roboto', sans-serif;
+  box-sizing: border-box;
 }
 
 body {
-  background: #fffff0;
+  background: #16BC16;
 
 }
 
@@ -14,15 +15,42 @@ body {
   background-color:
 }
 
-.dealerArea, .playerArea {
+.playerArea {
     box-sizing: border-box;
     position: relative;
     height: 200px;
     margin-bottom: 5px;
     background-color: #16BC16;
+    border: 3px black solid;
 }
 
+.playerCards{
+  background: white;
+  width: 100px;
+  height: 150px;
+  border: 1px;
+  margin: 10px;
 
-.dealerTotal, .playerTotal {
+}
+
+.card {
+  background-color: white;
+  background-repeat: no-repeat;
+  border-color: #808080 #000000 #000000 #808080;
+  border-width: 1px;
+  border-style: solid;
+  color: #000000;
+  font-size: 20pt;
+  position: absolute;
+  width:  3.75em;
+  height: 5.00em;
+  margin: 0 auto;
+  text-align: center;
+  line-height: 5;
+
+}
+}
+.gameButton {
+  font-size: 1.2em;
 
 }
