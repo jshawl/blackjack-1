@@ -15,42 +15,39 @@ body {
   background-color:
 }
 
-.playerArea {
+.playerArea, .dealerArea {
     box-sizing: border-box;
-    position: relative;
     height: 200px;
+    position: relative;
     margin-bottom: 5px;
     background-color: #16BC16;
     border: 3px black solid;
 }
 
-.playerCards{
-  background: white;
-  width: 100px;
-  height: 150px;
-  border: 1px;
-  margin: 10px;
-
-}
-
 .card {
   background-color: white;
-  background-repeat: no-repeat;
   border-color: #808080 #000000 #000000 #808080;
   border-width: 1px;
   border-style: solid;
   color: #000000;
   font-size: 20pt;
-  position: absolute;
+  position: relative;
   width:  3.75em;
   height: 5.00em;
-  margin: 0 auto;
   text-align: center;
   line-height: 5;
-
+  display: inline-block;
+  margin-left: 5px;
 }
+
 }
 .gameButton {
   font-size: 1.2em;
+}
 
+.playerTotal {
+  color: white;
+  position: relative;
+  bottom: -165px;
+  left: 10px;
 }
