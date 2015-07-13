@@ -5,8 +5,8 @@ var deck = [];
 var playerHand = [];
 var dealerHand = [];
 var money = 500;
-var dealerTotal = 0;
-var playerTotal = 0;
+var dealerValue = 0;
+var playerValue = 0;
 
 for (var i = 0; i< 52; i++){
   var j = (Math.floor(Math.random() * i));
@@ -52,15 +52,12 @@ var toDealerHand = function(card) {
   dealerHand.push(dealerCard);
   return dealerCard;
 }
-var playerTotal = function (array) {
+var handTotal = function (array) {
     var player = 0;
     for( var i = 0; i < array.length; i++){
-
       player += cardValue(array[i]);
-
     }
 
-    $('.playerTotal').html('Player Hand: ' + player)
     return player
 }
 
@@ -73,15 +70,15 @@ var dealer = function(){
   $('.dealerCard').eq(dealerDiv).html(string);
 }
 
-}
 
 var hit = function() {
   var string = cardString(toHand());
     $('<div><div>').addClass('playerCard').appendTo('.playerArea');
         playerDiv +=1;
       $('.playerCard').eq(playerDiv).html(string);
-      playerTotal(playerHand);
-      if(playerTotal(playerHand) > 21) {alert('You busted!')}
+      $('.playerTotal').html('Player Hand: ' + handTotal(playerHand))
+
+      if(handTotal(playerHand) > 21) {alert('You busted!')}
 
 }
 $(document).ready (function (){
@@ -94,12 +91,32 @@ $(document).ready (function (){
 
   $('#stand').on('click', function(){
 
-    alert ('You chose to stand on ' + playerTotal(playerHand));
+    alert ('You chose to stand on ' + handTotal(playerHand));
+    $('.hiddenCard').remove();
+
+    var string = cardString(toDealerHand());
+      $('<div><div>').addClass('dealerCard').appendTo('.dealerArea')
+        dealerDiv +=1;
+      $('.dealerCard').eq(dealerDiv).html(string);
+
+
+    if (handTotal(dealerHand) < 17) {
+        $('<div><div>').addClass('dealerCard').appendTo('.dealerArea')
+        dealerDiv+=1;
+        $('.dealerCard').eq(dealerDiv).html(string);
+    }
+
+    else if (handTotal(dealerHand)> 21){
+      alert('Dealer Busted! You win!');
+    }
+    else if (17 <= handTotal(dealerHand) < 21 ){
+      console.log('Dealer has ' + handTotal(dealerHand));
+    }
 
   })
 
   $('#deal').on('click', function(){
-
+    $('.dealerCard').remove();
     dealer();
 
   })
