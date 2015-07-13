@@ -82,10 +82,16 @@ var hit = function() {
 
 }
 $(document).ready (function (){
+$('.money').text('Money: $' + money)
 
 //Hit Button Click Event
   $('#hit').on('click', function (){
         hit();
+        var playerTotal = handTotal(playerHand);
+        if(playerTotal === 21){
+          alert('BlackJack!')
+          money+=currentBet;
+        }
 
       })
 
@@ -93,30 +99,47 @@ $(document).ready (function (){
 
     alert ('You chose to stand on ' + handTotal(playerHand));
     $('.hiddenCard').remove();
-
+    var dealerHit = true
+    while (dealerHit === true){
     var string = cardString(toDealerHand());
       $('<div><div>').addClass('dealerCard').appendTo('.dealerArea')
         dealerDiv +=1;
       $('.dealerCard').eq(dealerDiv).html(string);
-
-
-    if (handTotal(dealerHand) < 17) {
-        $('<div><div>').addClass('dealerCard').appendTo('.dealerArea')
-        dealerDiv+=1;
-        $('.dealerCard').eq(dealerDiv).html(string);
+      if (handTotal(dealerHand) > 21){
+        console.log('Dealer Has Busted!');
+        dealerHit = false;
+        money += currentBet;
+        $('.money').text('Money: $' + money)
+      }
+      else if (17 <= handTotal(dealerHand) && handTotal(dealerHand) <= 21){
+        console.log('Dealer has ' + handTotal(dealerHand))
+        dealerHit = false;
+      }
     }
-
-    else if (handTotal(dealerHand)> 21){
-      alert('Dealer Busted! You win!');
+    var playerTotal = handTotal(playerHand)
+    var dealerTotal = handTotal(dealerHand)
+    if(dealerTotal > 21){money += currentBet}
+    if (playerTotal < 21 && playerTotal > dealerTotal){
+      alert('You Win!');
+      money+=currentBet;
+      $('.money').text('Money: $' + money)
     }
-    else if (17 <= handTotal(dealerHand) < 21 ){
-      console.log('Dealer has ' + handTotal(dealerHand));
+    if (dealerTotal <= 21 && dealerTotal > playerTotal){
+      alert('Dealer Wins!')
+      money = (money - currentBet)
+      $('.money').text('Money: $' + money)
     }
+    if (playerTotal === dealerTotal){alert('Push')}
 
   })
 
   $('#deal').on('click', function(){
     $('.dealerCard').remove();
+    $('.playerCard').remove();
+    playerDiv =-1;
+    dealerDiv =-1;
+    dealerHand = [];
+    playerHand = [];
     dealer();
 
   })
@@ -125,5 +148,5 @@ $(document).ready (function (){
     currentBet += 25;
     if (currentBet <= money){$('.bet').html('Current Bet: $' + currentBet)}
     else {alert('Not Enough Money!')}
-  })
+    })
 })
