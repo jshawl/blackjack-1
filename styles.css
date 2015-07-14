@@ -16,7 +16,7 @@ footer {
   color: white;
   text-align: center;
   font-style: italic;
-  
+
 }
 
 
@@ -30,7 +30,7 @@ footer {
 .playerArea, .dealerArea {
     height: 200px;
     position: relative;
-    width: 90%;
+    width: 75%;
     background-color: #16BC16;
     border: 3px black solid;
     margin: 0 auto;
