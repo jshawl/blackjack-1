@@ -66,12 +66,23 @@ var handTotal = function (array) {
 var dealer = function(){
 
   var string = cardString(toDealerHand());
-  $('<div><div>').addClass('dealerCard').appendTo('.dealerArea')
-  $('<div><div>').addClass('hiddenCard').appendTo('.dealerArea')
-    dealerDiv +=1;
-  $('<div></div>').addClass('face').appendTo('.dealerCard').eq(dealerDiv)
-  $('.face').eq(dealerFace).html(string);
-  dealerFace +=1;
+    $('<div></div>').addClass('dealerCard').appendTo('.dealerArea')
+    $('<div></div>').addClass('hiddenCard').appendTo('.dealerArea')
+      dealerDiv +=1;
+    $('<div></div>').addClass('face').appendTo('.dealerCard').eq(dealerDiv)
+    $('.dealerArea .face').eq(dealerFace).html(string);
+    dealerFace +=1;
+    for(var i =0; i < 2; i++){
+      hit();
+    }
+    $('.playerTotal').text('Player Total: ' + handTotal(playerHand));
+
+    if (handTotal(playerHand) === 21 && playerHand.length === 2) {
+      alert('Blackjack! You win!')
+      money += currentBet
+      $('.money').text('Money: ' + money);
+    }
+
 }
 
 
@@ -79,12 +90,48 @@ var hit = function() {
   var string = cardString(toHand());
     $('<div><div>').addClass('playerCard').appendTo('.playerArea');
         playerDiv +=1;
-      $('.playerCard').eq(playerDiv).html(string);
-      $('.playerTotal').html('Player Hand: ' + handTotal(playerHand))
-
+    $('<div></div>').addClass('face').appendTo($('.playerCard').eq(playerDiv))
+      playerFace += 1;
+    $('.playerArea .face').eq(playerFace).html(string);
+    $('.playerTotal').text('Player Total: ' + handTotal(playerHand))
       if(handTotal(playerHand) > 21) {alert('You busted!')}
 
 }
+
+var cashier = function() {
+    var money = 500
+    $('.money').text('Money: $' + money)
+
+}
+
+var resetGame = function() {
+  $('.dealerCard').remove();
+  $('.playerCard').remove();
+  playerDiv =-1;
+  dealerDiv =-1;
+  playerFace = -1;
+  dealerFace = -1;
+  dealerHand = [];
+  playerHand = [];
+}
+
+var checkWin = function (){
+  var playerTotal = handTotal(playerHand)
+  var dealerTotal = handTotal(dealerHand)
+    if(dealerTotal > 21){money += currentBet}
+    if (playerTotal < 21 && playerTotal > dealerTotal){
+      alert('You Win!');
+      money+=currentBet;
+      $('.money').text('Money: $' + money)
+  }
+  if (dealerTotal <= 21 && dealerTotal > playerTotal){
+    alert('Dealer Wins!')
+    money = (money - currentBet)
+    $('.money').text('Money: $' + money)
+  }
+  if (playerTotal === dealerTotal){alert('Push')}
+}
+
 $(document).ready (function (){
 $('.money').text('Money: $' + money)
 
@@ -92,11 +139,6 @@ $('.money').text('Money: $' + money)
   $('#hit').on('click', function (){
         hit();
         var playerTotal = handTotal(playerHand);
-        if(playerTotal === 21){
-          alert('BlackJack!')
-          money+=currentBet;
-        }
-
       })
 
   $('#stand').on('click', function(){
@@ -114,47 +156,27 @@ $('.money').text('Money: $' + money)
 
 
       if (handTotal(dealerHand) > 21){
-        console.log('Dealer Has Busted!');
+        alert('Dealer Has Busted!');
         dealerHit = false;
         money += currentBet;
         $('.money').text('Money: $' + money)
       }
       else if (17 <= handTotal(dealerHand) && handTotal(dealerHand) <= 21){
-        console.log('Dealer has ' + handTotal(dealerHand))
         dealerHit = false;
       }
     }
-    var playerTotal = handTotal(playerHand)
-    var dealerTotal = handTotal(dealerHand)
-    if(dealerTotal > 21){money += currentBet}
-    if (playerTotal < 21 && playerTotal > dealerTotal){
-      alert('You Win!');
-      money+=currentBet;
-      $('.money').text('Money: $' + money)
-    }
-    if (dealerTotal <= 21 && dealerTotal > playerTotal){
-      alert('Dealer Wins!')
-      money = (money - currentBet)
-      $('.money').text('Money: $' + money)
-    }
-    if (playerTotal === dealerTotal){alert('Push')}
-
+    checkWin();
   })
-
   $('#deal').on('click', function(){
-    $('.dealerCard').remove();
-    $('.playerCard').remove();
-    playerDiv =-1;
-    dealerDiv =-1;
-    dealerHand = [];
-    playerHand = [];
+    resetGame();
     dealer();
-
   })
-
   $('#increaseBet').on('click', function(){
     currentBet += 25;
     if (currentBet <= money){$('.bet').html('Current Bet: $' + currentBet)}
     else {alert('Not Enough Money!')}
     })
+
+  $('#cashier').on('click', cashier)
+
 })

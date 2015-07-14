@@ -9,14 +9,22 @@ body {
 }
 
 nav {
-  margin-top: 5px;
+    margin: 5px 0 10px 10px;
 }
+
+footer {
+  color: white;
+  text-align: center;
+  font-style: italic;
+  
+}
+
 
 .title{
   text-align: center;
   font-size: 3em;
   font-style: italic;
-  background-color:
+  color: white;
 }
 
 .playerArea, .dealerArea {
@@ -27,23 +35,8 @@ nav {
     border: 3px black solid;
     margin: 0 auto;
     margin-bottom: 5px;
+    border-radius: 100px;
 }
-
-/*.playerCard, .dealerCard, .hiddenCard {
-  background-color: white;
-  border-color: #808080 #000000 #000000 #808080;
-  border-width: 1px;
-  border-style: solid;
-  color: #000000;
-  font-size: 20pt;
-  position: relative;
-  width:  3.75em;
-  height: 5.00em;
-  text-align: center;
-  display: inline-block;
-  margin-left: 5px;
-  margin-top: 30px;
-}*/
 
 }
 .gameButton {
@@ -56,20 +49,16 @@ nav {
   margin-left: 10px
 }
 
-
-.dealerArea h1 {
-  text-align: center;
-  color: white;
-
-}
-
 .playerCard, .dealerCard, .hiddenCard{
   width:100px;
   height:150px;
-  background:white;
+  background:#f0ffff;
   position:relative;
-  margin-left: 5px;
+  margin: 5px 0 0 5px;
+  border-radius: 10px 0 10px;
   display: inline-block;
+  left: 100px;
+  top: 15px;
 }
 
 .hiddenCard {
