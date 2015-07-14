@@ -1,6 +1,8 @@
 var currentBet = 25;
 var playerDiv = -1;
 var dealerDiv = -1;
+var dealerFace = -1;
+var playerFace = -1;
 var deck = [];
 var playerHand = [];
 var dealerHand = [];
@@ -67,7 +69,9 @@ var dealer = function(){
   $('<div><div>').addClass('dealerCard').appendTo('.dealerArea')
   $('<div><div>').addClass('hiddenCard').appendTo('.dealerArea')
     dealerDiv +=1;
-  $('.dealerCard').eq(dealerDiv).html(string);
+  $('<div></div>').addClass('face').appendTo('.dealerCard').eq(dealerDiv)
+  $('.face').eq(dealerFace).html(string);
+  dealerFace +=1;
 }
 
 
@@ -102,9 +106,13 @@ $('.money').text('Money: $' + money)
     var dealerHit = true
     while (dealerHit === true){
     var string = cardString(toDealerHand());
-      $('<div><div>').addClass('dealerCard').appendTo('.dealerArea')
-        dealerDiv +=1;
-      $('.dealerCard').eq(dealerDiv).html(string);
+      $('<div></div>').addClass('dealerCard').appendTo('.dealerArea');
+      dealerDiv += 1;
+      $('<div></div>').addClass('face').appendTo($('.dealerCard').eq(dealerDiv))
+      dealerFace += 1;
+      $('.dealerArea .face').eq(dealerFace).html(string);
+
+
       if (handTotal(dealerHand) > 21){
         console.log('Dealer Has Busted!');
         dealerHit = false;
