@@ -9,17 +9,20 @@ var dealerHand = [];
 var money = 500;
 var dealerValue = 0;
 var playerValue = 0;
+//below loop shuffles deck initially
 for (var i = 0; i< 52; i++){
   var j = (Math.floor(Math.random() * i));
   if (j != i){deck [i] = deck[j]}
   deck[j] = i;
 }
+//cardValue assigns an index to the cards, separated by ace and face card
 var cardValue = function (card) {
   var index = Math.floor((card/4) + 1);
   if (index === 1){index = 11;}
   else if (index > 10){index = 10;}
   return index;
 }
+// cardString combines the index and suit into a string to pass through to the DOM objects
 var cardString = function(card){
   var index =  Math.floor((card/4) + 1);
   var suit = card % 4;
@@ -38,21 +41,25 @@ var cardString = function(card){
     if (suit === 3){string += suits[3]}
     return string;
 }
+//this pushes cards from the deck array to the playerHand array
 var toHand = function(card) {
   var playerCard = deck.pop();
   playerHand.push(playerCard);
   return playerCard;
 }
+//this is a repeat of the abvoe function but for dealer. I'd like to combine these into one function at some point.
 var toDealerHand = function(card) {
   var dealerCard = deck.pop();
   dealerHand.push(dealerCard);
   return dealerCard;
 }
+//totals the hand value of any array
 var handTotal = function (array) {
     var player = 0;
     for( var i = 0; i < array.length; i++){ player += cardValue(array[i]);}
     return player
 }
+// functionality for the deal button. adds two cards to dealer and to player
 var dealer = function(){
   var string = cardString(toDealerHand());
     $('<div></div>').addClass('dealerCard').appendTo('.dealerArea')
@@ -72,7 +79,7 @@ var dealer = function(){
       $('.money').text('Money: $' + money);
     }
 }
-
+//functionality for the hit function/win testing
 var hit = function() {
   var string = cardString(toHand());
     $('<div><div>').addClass('playerCard').appendTo('.playerArea');
@@ -88,11 +95,12 @@ var hit = function() {
         resetGame();
       }
 }
-
+//cashier resets money to 500
 var cashier = function() {
     var money = 500
     $('.money').text('Money: $' + money)
 }
+//resets gameboard other than the running money total
 var resetGame = function() {
   $('.dealerCard, .playerCard, .hiddenCard').remove();
   playerDiv =-1;
@@ -102,6 +110,7 @@ var resetGame = function() {
   dealerHand = [];
   playerHand = [];
 }
+//another somewhat repetitive function with some of the Stand button code. This has some win checking and results.
 var checkWin = function (){
   var playerTotal = handTotal(playerHand)
   var dealerTotal = handTotal(dealerHand)
@@ -118,6 +127,7 @@ var checkWin = function (){
   }
   if (playerTotal === dealerTotal){alert('Push')}
 }
+//this creates divs to display the actual cards. could likely combine this with dealerHand function moving forward
 var cardToDealer = function (){
   var string = cardString(toDealerHand());
     $('<div></div>').addClass('dealerCard').appendTo('.dealerArea');
@@ -126,7 +136,7 @@ var cardToDealer = function (){
     dealerFace += 1;
     $('.dealerArea .face').eq(dealerFace).html(string);
 }
-
+//testing Soft Ace functionality. Not fully working yet, but getting there. 
 var softAce = function(){
   var hand = handTotal(playerHand);
   var index = [];
