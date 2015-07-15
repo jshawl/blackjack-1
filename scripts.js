@@ -151,14 +151,15 @@ $(document).ready (function (){
 $('.money').text('Money: $' + money)
 //Hit Button
   $('#hit').on('click', function (){
-        hit();
         softAce();
+        hit();
         var playerTotal = handTotal(playerHand);
       })
 //Stand Button
   $('#stand').on('click', function(){
     alert ('You chose to stand on ' + handTotal(playerHand));
     $('.hiddenCard').remove();
+    softAce();
     var dealerHit = true;
     while (dealerHit === true){cardToDealer();
       if (handTotal(dealerHand) > 21){
@@ -167,12 +168,10 @@ $('.money').text('Money: $' + money)
         money += currentBet;
         $('.money').text('Money: $' + money)
       }
-      else if (17 <= handTotal(dealerHand) && handTotal(dealerHand) <= 21 && handTotal(dealerHand) > handTotal(playerHand)){
-
+      else if (17 <= handTotal(dealerHand) && handTotal(dealerHand) <= 21 && handTotal(dealerHand)){
         dealerHit = false;
       }
     }
-      softAce();
       checkWin();
     })
 //Deal Button
