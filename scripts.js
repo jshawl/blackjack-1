@@ -157,6 +157,7 @@ $('.money').text('Money: $' + money)
   $('#stand').on('click', function(){
     alert ('You chose to stand on ' + handTotal(playerHand));
     $('.hiddenCard').remove();
+    softAce();
     var dealerHit = true;
     while (dealerHit === true){cardToDealer();
       if (handTotal(dealerHand) > 21){
