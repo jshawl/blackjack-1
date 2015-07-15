@@ -9,11 +9,13 @@ var dealerHand = [];
 var money = 500;
 var dealerValue = 0;
 var playerValue = 0;
+
 for (var i = 0; i< 52; i++){
   var j = (Math.floor(Math.random() * i));
   if (j != i){deck [i] = deck[j]}
   deck[j] = i;
 }
+
 var cardValue = function (card) {
   var index = Math.floor((card/4) + 1);
   if (index === 1){index = 11;}
@@ -101,6 +103,7 @@ var resetGame = function() {
   dealerFace = -1;
   dealerHand = [];
   playerHand = [];
+  $('.playerTotal').text('Player Total: ')
 }
 var checkWin = function (){
   var playerTotal = handTotal(playerHand)
@@ -126,7 +129,6 @@ var cardToDealer = function (){
     dealerFace += 1;
     $('.dealerArea .face').eq(dealerFace).html(string);
 }
-
 var softAce = function(){
   var hand = handTotal(playerHand);
   var index = [];
@@ -166,9 +168,7 @@ $('.money').text('Money: $' + money)
         $('.money').text('Money: $' + money)
       }
       else if (17 <= handTotal(dealerHand) && handTotal(dealerHand) <= 21 && handTotal(dealerHand) > handTotal(playerHand)){
-        alert('Dealer has ' + handTotal(dealerHand) + '! Dealer Wins!');
-        money -= currentBet
-        $('.money').text('Money: $' + money)
+
         dealerHit = false;
       }
     }
