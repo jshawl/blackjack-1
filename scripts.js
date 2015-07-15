@@ -85,7 +85,7 @@ var hit = function() {
         alert('You busted!')
         money -= currentBet
         $('.money').text('Money: $' + money);
-        // ADD RESET BACK HERE
+        resetGame();
       }
 }
 
@@ -165,10 +165,14 @@ $('.money').text('Money: $' + money)
         money += currentBet;
         $('.money').text('Money: $' + money)
       }
-      else if (17 <= handTotal(dealerHand) && handTotal(dealerHand) <= 21){
+      else if (17 <= handTotal(dealerHand) && handTotal(dealerHand) <= 21 && handTotal(dealerHand) > handTotal(playerHand)){
+        alert('Dealer has ' + handTotal(dealerHand) + '! Dealer Wins!');
+        money -= currentBet
+        $('.money').text('Money: $' + money)
         dealerHit = false;
       }
     }
+      softAce();
       checkWin();
     })
 //Deal Button
