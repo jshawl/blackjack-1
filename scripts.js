@@ -134,14 +134,14 @@ var softAce = function(){
   for (var i = 0; i < playerHand.length; i++) {
       index.push(cardValue(playerHand[i]));
     }
-    console.log(index)
   for (var i = 0; i < index.length; i++){
         if (index[i] === 11){
           index[i] = 1
         }
-
     }
-  
+  if (handTotal(index) < 21 ){
+      $('.playerTotal').text('Player Total: ' + handTotal(index));
+      }
   }
 }
 //Click Events
@@ -150,6 +150,7 @@ $('.money').text('Money: $' + money)
 //Hit Button
   $('#hit').on('click', function (){
         hit();
+        softAce();
         var playerTotal = handTotal(playerHand);
       })
 //Stand Button
