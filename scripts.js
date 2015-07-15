@@ -149,8 +149,8 @@ $(document).ready (function (){
 $('.money').text('Money: $' + money)
 //Hit Button
   $('#hit').on('click', function (){
-        hit();
         softAce();
+        hit();
         var playerTotal = handTotal(playerHand);
       })
 //Stand Button
@@ -169,7 +169,6 @@ $('.money').text('Money: $' + money)
         dealerHit = false;
       }
     }
-      softAce();
       checkWin();
     })
 //Deal Button
