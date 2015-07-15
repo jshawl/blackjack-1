@@ -4,7 +4,9 @@ The game was designed using HTML, CSS, Javascript and JQuery. The process of dev
 
 Once the hand is over, the user can increase their bet, and then use the Deal function to play another hand.
 
-Unsolved problems: I'm still working on the soft Ace functionality, for when an ace should be equal to 1 rather than 11. I'd also like to remove the alert function, and add 
+Unsolved problems: I'm still working on the soft Ace functionality, for when an ace should be equal to 1 rather than 11. I'd also like to remove the alert function, and add nicer looking cards to the game at some point. Additional stylistic updates to make the game board look more like a casino table are possible as well. The deck also needs to be reshuffled when there is no longer any cards in the array. 
+
+Likely some additional bugs in game logic that I'm missing from lack of playing.
 
 
 
