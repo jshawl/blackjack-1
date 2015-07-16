@@ -1,5 +1,5 @@
 *{
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', sans-serif; /* nice use of a fallback font!*/
   box-sizing: border-box;
 }
 
@@ -18,7 +18,7 @@ footer {
   font-style: italic;
 
 }
-
+/*Please fix formatting and empty white space*/
 
 .title{
   text-align: center;
@@ -43,7 +43,7 @@ footer {
   font-size: 1.2em;
 }
 
-.playerTotal, .money, .bet{
+.playerTotal, .money, .bet{ /* excellent comma separated selectors! */
   color: white;
   position: relative;
   margin-left: 10px
@@ -70,6 +70,6 @@ footer {
   position:absolute;
   width:100%;
   top:50%;
-  transform:translateY(-50%);
+  transform:translateY(-50%); /* nice! older browsers will need a vendor prefix here. */
   font-size: 1.5em;
 }

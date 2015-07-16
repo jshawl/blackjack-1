@@ -9,23 +9,27 @@ var dealerHand = [];
 var money = 500;
 var dealerValue = 0;
 var playerValue = 0;
+//excellent job declaring all global variables at the top
+// can you think of a way to prevent these variables from being global?
+// maybe attach them to an object?
 
 for (var i = 0; i< 52; i++){
   var j = (Math.floor(Math.random() * i));
   if (j != i){deck [i] = deck[j]}
   deck[j] = i;
-}
+} // nice shuffle implementation! Won't this leave out or possibly repeat cards?
 
 var cardValue = function (card) {
   var index = Math.floor((card/4) + 1);
   if (index === 1){index = 11;}
   else if (index > 10){index = 10;}
+  // remember to indent nested blocks of code to increase readability.
   return index;
 }
 var cardString = function(card){
   var index =  Math.floor((card/4) + 1);
   var suit = card % 4;
-  var suits = ['&spades;', '&clubs;', '&hearts;', '&diams;'];
+  var suits = ['&spades;', '&clubs;', '&hearts;', '&diams;']; //nice!!
   var string ='';
     //# assignment based on cards 0-14 A low, K high
     if (1 < index < 11){string += index}
@@ -33,6 +37,7 @@ var cardString = function(card){
     if (index === 12){string = 'Q'}
     if (index === 11){string = 'J'}
     if (index === 1){string = 'A'}
+    // you could also create an array of values and check the `indexOf` the value to see how it ranks.
     //suit assignment based on remainder
     if (suit === 0){string += suits[0]}
     if (suit === 1){string += suits[1]}
@@ -77,6 +82,8 @@ var dealer = function(){
 
 var hit = function() {
   var string = cardString(toHand());
+  // this function looks very similar to the above dealer function
+  // can you think of a way to combine this functionality?
     $('<div><div>').addClass('playerCard').appendTo('.playerArea');
         playerDiv +=1;
     $('<div></div>').addClass('face').appendTo($('.playerCard').eq(playerDiv))
@@ -130,6 +137,7 @@ var cardToDealer = function (){
     $('.dealerArea .face').eq(dealerFace).html(string);
 }
 var softAce = function(){
+  // nice job implementing this feature!!
   var hand = handTotal(playerHand);
   var index = [];
   if (hand > 21){
@@ -181,6 +189,7 @@ $('.money').text('Money: $' + money)
     })
 //Increase Button
     $('#increaseBet').on('click', function(){
+      // it would be nice if users could decrease bet, or enter their own amount
       currentBet += 25;
       if (currentBet <= money){$('.bet').html('Current Bet: $' + currentBet)}
       else {alert('Not Enough Money!')}
@@ -188,3 +197,9 @@ $('.money').text('Money: $' + money)
 //Cashier Button
     $('#cashier').on('click', cashier)
 })
+
+// Overall:
+// Nice job on this project! I would like you to focus on code formatting,
+// semantic variable names, and DRYer code. There are currently several global
+// variables in this application which makes it a little difficult to follow
+// the flow of the program.
